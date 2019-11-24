@@ -1,10 +1,14 @@
 from HomieAdapter import HomieAdapter
-import sys
-import re
 import time
 import json
 
-ha = HomieAdapter("192.168.178.100","1883","mqtt",False,"rstdelange","pasw0rd")
+mqtt_address = "192.168.178.100"
+mqtt_port = "1883"
+mqtt_root = "homie/homey-5d667df592e8eb0c7d3f1022"
+mqtt_authentication = False
+mqtt_username = "rstdelange"
+mqtt_password = "passw0rd"
+ha = HomieAdapter(mqtt_address,mqtt_port,mqtt_root,mqtt_authentication,mqtt_username,mqtt_password)
 print("sleeping")
 time.sleep(10)
 

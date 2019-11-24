@@ -9,8 +9,8 @@ class HomieAdapter:
 
     DEVICES = []
 
-    def __init__(self,host, port,root,authentication,login,password):
-        self.homiemqtt = HomieMQTT("192.168.178.100","1883","mqtt",False,"rstdelange","pasw0rd")
+    def __init__(self,host, port,root,authentication,user,password):
+        self.homiemqtt = HomieMQTT(host,port,root,authentication,user,password)
         #print("sleeping....")
         #time.sleep(10)
 

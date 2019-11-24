@@ -11,13 +11,15 @@ class HomieMQTT:
     homey_parent = ""
     homey_device = ""
 
-    def __init__(self,host, port,root,authentication,login,password):
+    def __init__(self,host, port,root,authentication,user,password):
         try:
             self.mqttc = mqtt.Client()
+            if authentication == True:
+                self.mqttc.username_pw_set(username=user, password=password)
             self.mqttc.on_message = self.on_message
             print("Homey discovery started.....")
             self.mqttc.connect(host, int(port), 60)
-            self.mqttc.subscribe("homie/homey-5d667df592e8eb0c7d3f1022/#", 0)
+            self.mqttc.subscribe(root+"/#", 0)
             threading.Thread(target=self.startloop).start()
         except KeyboardInterrupt:
             print("Received topics:")
