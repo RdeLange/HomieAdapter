@@ -2,37 +2,18 @@ from HomieAdapter import HomieAdapter
 import time
 import json
 
+#config
 mqtt_address = "192.168.178.100"
 mqtt_port = "1883"
 mqtt_root = "homie/homey-5d667df592e8eb0c7d3f1022"
 mqtt_authentication = False
 mqtt_username = "rstdelange"
 mqtt_password = "passw0rd"
+
 ha = HomieAdapter(mqtt_address,mqtt_port,mqtt_root,mqtt_authentication,mqtt_username,mqtt_password)
 print("sleeping")
 time.sleep(10)
 
-
-def getdevicesjsonold(ha):
-    deviceid, message, parent, device = ha.getdevices()
-    results = []
-    i=0
-    for devicename in device._nodes:
-        properties = device._nodes[devicename]._properties
-        for prop in properties:
-            ha_type = device._nodes[devicename]._type
-            if ha_type == "sensor":
-                if prop.find("measure") > -1:
-                    ha_type = prop[8:]
-
-
-            results.append(
-                {"idx": i, "Name": device._nodes[devicename]._name, "Type": ha_type, "Properties":[{"Name": prop,"Settable": properties[prop]._settable, "Unit": properties[prop]._unit,
-                 "Value": properties[prop]._value,"Datatype": properties[prop]._datatype,"Format": properties[prop]._format}]})
-            i=i+1
-    result = json.dumps({'result': results})
-    print(result)
-    #print(result[3][4])
 
 def getdevicesjson(ha):
     result = ha.getdevicesjson()
