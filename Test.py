@@ -13,6 +13,7 @@ mqtt_password = "passw0rd"
 ha = HomieAdapter(mqtt_address,mqtt_port,mqtt_root,mqtt_authentication,mqtt_username,mqtt_password)
 print("sleeping")
 time.sleep(10)
+print(ha.check_mqttconnection())
 
 
 def getdevicesjson(ha):
@@ -110,6 +111,8 @@ def getdevices(ha):
     print("Print properties of livingroom-thermostat...")
     print(device._nodes["livingroom-thermostat"]._properties)
 
-#getdevicesjson(ha)
-getdevices(ha)
-#debug(ha)
+if ha.check_mqttconnection() == True:
+    #getdevicesjson(ha)
+    getdevices(ha)
+    #debug(ha)
+else: print("No Connection with mqtt broker")
